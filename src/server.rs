@@ -1,9 +1,9 @@
-mod hello_world;
-
 use std::time::Duration;
 
-use crate::greeter_server::{Greeter, GreeterServer};
-use hello_world::*;
+use crate::hello_world::{
+    greeter_server::{Greeter, GreeterServer},
+    HelloRequest, HelloResponse,
+};
 use tokio::{
     signal::unix::{signal, SignalKind},
     spawn,
@@ -11,6 +11,10 @@ use tokio::{
     time::sleep,
 };
 use tonic::{transport::Server, Request, Response, Status};
+
+pub mod hello_world {
+    tonic::include_proto!("helloworld");
+}
 
 #[derive(Default)]
 pub struct GreeterService;
